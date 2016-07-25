@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Meteo</string>
+
+
+    // Connection problem
+    <string name="connection_problem_dialog_title">Problème de connection</string>
+    <string name="connection_problem_dialog_message">Vérifiez votre connexion Internet</string>
+
+    // Location || Network disable
+    <string name="location_dialog_title">Problème de géolocalisation</string>
+    <string name="location_dialog_message">Veuillez activer la géolocalisation pour utiliser cette application.</string>
+    <string name="location_dialog_cancel">Quitter.</string>
+    <string name="location_dialog_settings">Paramètres</string>
+
+
+
+</resources>

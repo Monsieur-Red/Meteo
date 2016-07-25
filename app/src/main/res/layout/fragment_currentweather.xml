@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/top_bar"
+        layout="@layout/top_bar" />
+
+    <ImageView
+        android:id="@+id/img_weather"
+        android:layout_below="@+id/top_bar"
+        android:layout_width="148dp"
+        android:layout_height="148dp"
+        android:layout_marginTop="24dp"
+
+        android:layout_centerHorizontal="true"
+        android:src="@mipmap/ic_launcher"/>
+
+    <TextView
+        android:id="@+id/tv_temperature"
+        android:layout_below="@+id/img_weather"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:text="3°"
+        android:layout_centerHorizontal="true"
+        android:textSize="40sp"
+        android:textColor="@android:color/primary_text_dark"/>
+
+    <TextView
+        android:id="@+id/tv_weather_state"
+        android:layout_below="@+id/tv_temperature"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:text="Nuageux"
+        android:layout_centerHorizontal="true"
+        android:textSize="20sp"
+        android:textColor="@android:color/secondary_text_dark"
+        android:singleLine="true"/>
+
+    <TextView
+        android:id="@+id/tv_update"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:text="Dernière mise à jour : Maintenant"
+        android:textSize="14sp"
+        android:textColor="@android:color/secondary_text_dark"
+        android:singleLine="true"/>
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone" />
+
+</RelativeLayout>
