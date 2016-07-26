@@ -17,6 +17,7 @@ import com.koushikdutta.ion.Ion;
 import com.perso.red.meteo.R;
 import com.perso.red.meteo.models.AddressComponent;
 import com.perso.red.meteo.models.LocationJson;
+import com.perso.red.meteo.models.Network;
 
 import java.util.List;
 
@@ -93,7 +94,7 @@ public class GpsLocation implements LocationListener {
 
     private void getCityName() {
         Ion.with(activity.getApplicationContext())
-                .load("GET", "http://maps.googleapis.com/maps/api/geocode/json?latlng=" + String.valueOf(location.getLatitude()) + "," + String.valueOf(location.getLongitude()))
+                .load("GET", Network.URL_GOOGLE_API_MAP + String.valueOf(location.getLatitude()) + "," + String.valueOf(location.getLongitude()))
                 .as(new TypeToken<LocationJson>(){})
                 .setCallback(new FutureCallback<LocationJson>() {
                     @Override

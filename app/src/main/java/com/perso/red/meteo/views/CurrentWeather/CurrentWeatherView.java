@@ -22,8 +22,11 @@ public class CurrentWeatherView extends Fragment implements ICurrentWeatherView 
     private CurrentWeatherPresenter presenter;
 
     private ImageView   weatherImg;
-    private TextView    temperatureTv;
+    private TextView    tempTv;
+    private TextView    tempMinTv;
+    private TextView    tempMaxTv;
     private TextView    weatherStateTv;
+    private TextView    weatherSummaryTv;
     private TextView    updateTv;
 
     private ProgressBar progressBar;
@@ -49,8 +52,11 @@ public class CurrentWeatherView extends Fragment implements ICurrentWeatherView 
 
         // Init UI Elements
         weatherImg = (ImageView) view.findViewById(R.id.img_weather);
-        temperatureTv = (TextView) view.findViewById(R.id.tv_temperature);
+        tempTv = (TextView) view.findViewById(R.id.tv_temperature);
+        tempMinTv = (TextView) view.findViewById(R.id.tv_temperature_min);
+        tempMaxTv = (TextView) view.findViewById(R.id.tv_temperature_max);
         weatherStateTv = (TextView) view.findViewById(R.id.tv_weather_state);
+        weatherSummaryTv = (TextView) view.findViewById(R.id.tv_weather_summary);
         updateTv = (TextView) view.findViewById(R.id.tv_update);
         progressBar = (ProgressBar) view.findViewById(R.id.progress_bar);
 
@@ -79,5 +85,29 @@ public class CurrentWeatherView extends Fragment implements ICurrentWeatherView 
         dialog.setTitle(getString(title));
         dialog.setMessage(getString(msg));
         dialog.show();
+    }
+
+    public TextView getTempTv() {
+        return tempTv;
+    }
+
+    public TextView getTempMinTv() {
+        return tempMinTv;
+    }
+
+    public TextView getTempMaxTv() {
+        return tempMaxTv;
+    }
+
+    public TextView getWeatherStateTv() {
+        return weatherStateTv;
+    }
+
+    public TextView getWeatherSummaryTv() {
+        return weatherSummaryTv;
+    }
+
+    public TextView getUpdateTv() {
+        return updateTv;
     }
 }

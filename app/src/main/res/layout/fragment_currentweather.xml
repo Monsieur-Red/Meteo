@@ -4,48 +4,139 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/img_weather"
-        android:layout_width="148dp"
-        android:layout_height="148dp"
-        android:layout_marginTop="24dp"
-
-        android:layout_centerHorizontal="true"
-        android:src="@mipmap/ic_launcher"/>
-
-    <TextView
-        android:id="@+id/tv_temperature"
-        android:layout_below="@+id/img_weather"
+    <LinearLayout
+        android:id="@+id/weather_container"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:orientation="horizontal"
+        android:layout_centerHorizontal="true">
 
-        android:text="3°"
-        android:layout_centerHorizontal="true"
-        android:textSize="40sp"
-        android:textColor="@android:color/primary_text_dark"/>
+        <!-- Temperature Min Container -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="8dp"
+            android:orientation="vertical"
+            android:layout_gravity="center">
+
+            <TextView
+                android:id="@+id/tv_temperature_min"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textSize="20sp"
+                android:textColor="@color/primary_text"
+                android:singleLine="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/current_weather_view_min"
+                android:textSize="18sp"
+                android:textColor="@color/primary_text"
+                android:singleLine="true" />
+
+        </LinearLayout>
+
+        <!-- Current Temperature Container -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center">
+
+            <ImageView
+                android:id="@+id/img_weather"
+                android:layout_width="148dp"
+                android:layout_height="148dp"
+                android:layout_marginTop="24dp"
+
+                android:layout_gravity="center"
+                android:src="@mipmap/ic_launcher"/>
+
+            <TextView
+                android:id="@+id/tv_temperature"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_gravity="center"
+                android:textSize="40sp"
+                android:textColor="@color/primary_text"
+                android:textStyle="bold"
+                android:singleLine="true"/>
+
+            <TextView
+                android:id="@+id/tv_weather_state"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_gravity="center"
+                android:textSize="20sp"
+                android:textColor="@color/primary_text"
+                android:singleLine="true" />
+
+        </LinearLayout>
+
+        <!-- Temperature Max Container -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:orientation="vertical"
+            android:layout_gravity="center">
+
+            <TextView
+                android:id="@+id/tv_temperature_max"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_gravity="center"
+                android:textSize="20sp"
+                android:textColor="@color/primary_text"
+                android:singleLine="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_gravity="center"
+                android:text="@string/current_weather_view_max"
+                android:textSize="18sp"
+                android:textColor="@color/primary_text"
+                android:singleLine="true" />
+
+        </LinearLayout>
+
+    </LinearLayout>
 
     <TextView
-        android:id="@+id/tv_weather_state"
-        android:layout_below="@+id/tv_temperature"
+        android:id="@+id/tv_weather_summary"
+        android:layout_below="@+id/weather_container"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
 
-        android:text="Nuageux"
         android:layout_centerHorizontal="true"
-        android:textSize="20sp"
-        android:textColor="@android:color/secondary_text_dark"
-        android:singleLine="true"/>
+        android:textSize="18sp"
+        android:textColor="@color/primary_text"
+        android:singleLine="true" />
 
     <TextView
         android:id="@+id/tv_update"
+        android:layout_below="@+id/tv_weather_summary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
 
         android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
-        android:text="Dernière mise à jour : Maintenant"
         android:textSize="14sp"
-        android:textColor="@android:color/secondary_text_dark"
+        android:textColor="@color/primary_text"
         android:singleLine="true"/>
 
     <ProgressBar

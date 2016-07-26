@@ -1,5 +1,7 @@
 package com.perso.red.meteo.activity;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.Window;
 import android.view.WindowManager;
 
 import com.perso.red.meteo.R;
@@ -49,11 +52,8 @@ public class MainActivity extends AppCompatActivity {
         // Set Status Bar Color
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.primary_dark));
+            getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.primary));
         }
-    }
-
-    private void initViewPager() {
     }
 
     @Override

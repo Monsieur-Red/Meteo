@@ -20,7 +20,19 @@
     <string name="location_dialog_cancel">Quitter.</string>
     <string name="location_dialog_settings">Paramètres</string>
 
-
+    // CurrentWeahter View
+    <string name="current_weather_view_min">MIN</string>
+    <string name="current_weather_view_max">MAX</string>
+    <string name="current_weather_clear_day">Temps Clair</string>
+    <string name="current_weather_clear_night">Nuit Clair</string>
+    <string name="current_weather_rain">Pluie</string>
+    <string name="current_weather_snow">Neigeux</string>
+    <string name="current_weather_sleet">Grêleux</string>
+    <string name="current_weather_wind">Venteux</string>
+    <string name="current_weather_fog">Brumeux</string>
+    <string name="current_weather_cloudy">Nuageux</string>
+    <string name="current_weather_partly_cloudy_day">Journée Partiellement Nuageuse</string>
+    <string name="current_weather_partly_cloudy_night">Nuit Partiellement Nuageuse</string>
 
 
 </resources>
