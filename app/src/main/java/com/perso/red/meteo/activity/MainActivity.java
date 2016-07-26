@@ -25,6 +25,7 @@ import com.perso.red.meteo.activity.viewpager.MyViewPager;
 
 public class MainActivity extends AppCompatActivity {
 
+    private Toolbar                 toolbar;
     private MyViewPager             myViewPager;
     private MyNavigationBottomBar   myNavigationBottomBar;
     private GpsLocation             gpsLocation;
@@ -41,12 +42,11 @@ public class MainActivity extends AppCompatActivity {
 
         // Init ViewPager
         myViewPager = new MyViewPager(this);
-
         // Init Navigation Bottom Bar
         myNavigationBottomBar = new MyNavigationBottomBar(this, myViewPager.getViewPager());
 
         // Init ToolBar
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         // Set Status Bar Color
@@ -59,7 +59,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.toolbar, menu);
-
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -72,11 +71,13 @@ public class MainActivity extends AppCompatActivity {
                 Fragment    currentF = myViewPager.getCurrentFragment();
                 currentF.onViewCreated(currentF.getView(), currentF.getArguments());
                 return true;
-            case R.id.action_about:
-                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    public Toolbar getToolbar() {
+        return toolbar;
     }
 
     public MyNavigationBottomBar getMyNavigationBottomBar() {

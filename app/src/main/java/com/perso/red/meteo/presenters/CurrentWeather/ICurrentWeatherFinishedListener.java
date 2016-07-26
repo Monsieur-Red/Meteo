@@ -1,6 +1,6 @@
-package com.perso.red.meteo.presenters.CurrentWeather;
+package com.perso.red.meteo.presenters.currentWeather;
 
-import com.perso.red.meteo.models.weather.CurrentlyWeather;
+import com.perso.red.meteo.models.weather.CurrentWeather;
 import com.perso.red.meteo.models.weather.daily.DailyWeather;
 
 /**
@@ -11,6 +11,6 @@ public interface ICurrentWeatherFinishedListener {
 
     void onDialog(int title, int msg);
 
-    void onSuccessGetWeather(CurrentlyWeather currentlyWeather, DailyWeather dailyWeather);
+    void onSuccessGetWeather(CurrentWeather currentWeather, DailyWeather dailyWeather);
 
 }

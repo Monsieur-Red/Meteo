@@ -10,11 +10,4 @@
         android:iconifiedByDefault="true"
         app:showAsAction="ifRoom|collapseActionView" />
 
-    <item
-        android:id="@+id/action_about"
-        android:title="@string/toolbar_about"
-        android:icon="@drawable/ic_info_outline_black_36dp"
-        android:iconifiedByDefault="true"
-        app:showAsAction="ifRoom|collapseActionView" />
-
 </menu>

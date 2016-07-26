@@ -8,7 +8,7 @@
     // Navigation Bottom Bar
     <string name="navigation_bottom_bar_now">Maintenant</string>
     <string name="navigation_bottom_bar_today">24H</string>
-    <string name="navigation_bottom_bar_week">Semaine</string>
+    <string name="navigation_bottom_bar_about">À Propos</string>
 
     // Connection problem
     <string name="connection_problem_dialog_title">Problème de connection</string>
@@ -31,8 +31,35 @@
     <string name="current_weather_wind">Venteux</string>
     <string name="current_weather_fog">Brumeux</string>
     <string name="current_weather_cloudy">Nuageux</string>
-    <string name="current_weather_partly_cloudy_day">Journée Partiellement Nuageuse</string>
-    <string name="current_weather_partly_cloudy_night">Nuit Partiellement Nuageuse</string>
+    <string name="current_weather_partly_cloudy_day">Partiellement Nuageux</string>
+    <string name="current_weather_partly_cloudy_night">Partiellement Nuageux</string>
 
+    // HourlyWeather View
+    <string-array name="hourly_weather_view_hour_list">
+        <item>00:00</item>
+        <item>01:00</item>
+        <item>02:00</item>
+        <item>03:00</item>
+        <item>04:00</item>
+        <item>05:00</item>
+        <item>06:00</item>
+        <item>07:00</item>
+        <item>08:00</item>
+        <item>09:00</item>
+        <item>10:00</item>
+        <item>11:00</item>
+        <item>12:00</item>
+        <item>13:00</item>
+        <item>14:00</item>
+        <item>15:00</item>
+        <item>16:00</item>
+        <item>17:00</item>
+        <item>18:00</item>
+        <item>19:00</item>
+        <item>20:00</item>
+        <item>21:00</item>
+        <item>22:00</item>
+        <item>23:00</item>
+    </string-array>
 
 </resources>

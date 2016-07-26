@@ -5,6 +5,7 @@ import android.support.v4.view.ViewPager;
 
 import com.perso.red.meteo.R;
 import com.perso.red.meteo.activity.MainActivity;
+import com.perso.red.meteo.activity.MyNavigationBottomBar;
 
 /**
  * Created by pierr on 26/07/2016.
@@ -17,13 +18,13 @@ public class MyViewPager {
 
     public MyViewPager(final MainActivity activity) {
         viewPager = (ViewPager) activity.findViewById(R.id.viewpager);
+        viewPager.setPageTransformer(false, new MyPageTransformer());
 
         // Set Adapter
         myPagerAdapter = new MyPagerAdapter(activity.getSupportFragmentManager());
         viewPager.setAdapter(myPagerAdapter);
 
         // Set ViewPager pager transformer & limit & pos
-        viewPager.setPageTransformer(false, new MyPageTransformer());
         viewPager.setOffscreenPageLimit(3);
         viewPager.setCurrentItem(0);
 
@@ -48,7 +49,6 @@ public class MyViewPager {
             public void onPageScrollStateChanged(int state) {
             }
         });
-
     }
 
     public Fragment getCurrentFragment() {

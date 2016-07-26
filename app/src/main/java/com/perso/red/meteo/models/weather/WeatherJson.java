@@ -1,6 +1,7 @@
 package com.perso.red.meteo.models.weather;
 
 import com.perso.red.meteo.models.weather.daily.DailyWeather;
+import com.perso.red.meteo.models.weather.hourly.HourlyWeather;
 
 /**
  * Created by pierr on 26/07/2016.
@@ -19,11 +20,11 @@ public class WeatherJson {
     public static final String  ICON_PARTLY_CLOUDY_DAY = "partly-cloudy-day";
     public static final String  ICON_PARTLY_CLOUDY_NIGHT = "partly-cloudy-night";
 
-    private CurrentlyWeather    currently;
-    private HourlyWeather       hourly;
-    private DailyWeather daily;
+    private CurrentWeather  currently;
+    private HourlyWeather   hourly;
+    private DailyWeather    daily;
 
-    public CurrentlyWeather getCurrently() {
+    public CurrentWeather getCurrently() {
         return currently;
     }
 

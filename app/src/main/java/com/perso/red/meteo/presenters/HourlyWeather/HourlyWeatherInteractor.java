@@ -1,8 +1,7 @@
-package com.perso.red.meteo.presenters.currentWeather;
+package com.perso.red.meteo.presenters.hourlyWeather;
 
 import android.content.Context;
 import android.location.Location;
-import android.support.v7.app.AlertDialog;
 
 import com.google.gson.reflect.TypeToken;
 import com.koushikdutta.async.future.FutureCallback;
@@ -12,27 +11,27 @@ import com.perso.red.meteo.models.Network;
 import com.perso.red.meteo.models.weather.WeatherJson;
 
 /**
- * Created by pierr on 25/07/2016.
+ * Created by pierr on 26/07/2016.
  */
 
-public class CurrentWeatherInteractor {
+public class HourlyWeatherInteractor {
 
     private Context context;
 
-    public CurrentWeatherInteractor(Context context) {
+    public HourlyWeatherInteractor(Context context) {
         this.context = context;
     }
 
-    public void getWeather(final ICurrentWeatherFinishedListener listener, Location location, String date) {
+    public void getWeather(final IHourlyWeatherFinishedListener listener, Location location, String date) {
         Ion.with(context)
-                .load("GET", Network.URL_WEATHER_FORECAST + location.getLatitude() + "," + location.getLongitude() + "," + date + "?" + Network.OPTION_LANG_FR + "&" + Network.OPTION_UNITS_AUTO + Network.OPTION_EXCLUDE_BLOCK_CURRENT_WEATHER)
+                .load("GET", Network.URL_WEATHER_FORECAST + location.getLatitude() + "," + location.getLongitude() + "," + date + "?" + Network.OPTION_LANG_FR + "&" + Network.OPTION_UNITS_AUTO + Network.OPTION_EXCLUDE_BLOCK_HOURLY_WEATHER)
                 .as(new TypeToken<WeatherJson>() {
                 })
                 .setCallback(new FutureCallback<WeatherJson>() {
                     @Override
                     public void onCompleted(Exception error, WeatherJson result) {
                         if (error == null)
-                            listener.onSuccessGetWeather(result.getCurrently(), result.getDaily());
+                            listener.onSuccessGetWeather(result.getHourly().getData());
                         else
                             listener.onDialog(R.string.connection_problem_dialog_title, R.string.connection_problem_dialog_message);
                     }

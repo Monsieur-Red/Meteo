@@ -4,21 +4,21 @@ package com.perso.red.meteo.models.weather;
  * Created by pierr on 26/07/2016.
  */
 
-public class CurrentlyWeather {
+public class CurrentWeather {
 
-    private String icon;
-    private String temperature;
-    private String apparentTemperature; // "Feel like"
+    private String  icon;
+    private float   temperature;
+    private float   apparentTemperature; // "Feel like"
 
     public String getIcon() {
         return icon;
     }
 
-    public String getTemperature() {
+    public float getTemperature() {
         return temperature;
     }
 
-    public String getApparentTemperature() {
+    public float getApparentTemperature() {
         return apparentTemperature;
     }
 }

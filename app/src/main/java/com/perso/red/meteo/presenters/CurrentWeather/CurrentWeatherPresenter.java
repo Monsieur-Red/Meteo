@@ -1,18 +1,16 @@
-package com.perso.red.meteo.presenters.CurrentWeather;
+package com.perso.red.meteo.presenters.currentWeather;
 
-import android.location.Location;
+import android.view.View;
 
 import com.perso.red.meteo.R;
-import com.perso.red.meteo.Tools;
+import com.perso.red.meteo.Widgets.Tools;
 import com.perso.red.meteo.activity.MainActivity;
-import com.perso.red.meteo.models.weather.CurrentlyWeather;
+import com.perso.red.meteo.models.weather.CurrentWeather;
 import com.perso.red.meteo.models.weather.WeatherJson;
 import com.perso.red.meteo.models.weather.daily.DailyDataWeather;
 import com.perso.red.meteo.models.weather.daily.DailyWeather;
-import com.perso.red.meteo.views.CurrentWeather.CurrentWeatherView;
+import com.perso.red.meteo.views.currentWeather.CurrentWeatherView;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Locale;
 
 /**
@@ -42,23 +40,22 @@ public class CurrentWeatherPresenter implements ICurrentWeatherPresenter, ICurre
     }
 
     @Override
-    public void onSuccessGetWeather(CurrentlyWeather currentlyWeather, DailyWeather dailyWeather) {
+    public void onSuccessGetWeather(CurrentWeather currentWeather, DailyWeather dailyWeather) {
         // Update Data
         DailyDataWeather    dailyDataWeather = dailyWeather.getData().get(0);
 
         // Set Temperature Text
-        float   temp = Float.valueOf(currentlyWeather.getTemperature());
-        float   tempMin = Float.valueOf(dailyDataWeather.getTemperatureMin());
-        float   tempMax = Float.valueOf(dailyDataWeather.getTemperatureMax());
-        String  tempStr = String.valueOf((int)temp) + "°";
-        String  tempMinStr = String.valueOf((int)tempMin) + "°";
-        String  tempMaxStr = String.valueOf((int)tempMax) + "°";
+        String  tempStr = String.valueOf((int)currentWeather.getTemperature()) + "°";
+        String  tempMinStr = String.valueOf((int)dailyDataWeather.getTemperatureMin()) + "°";
+        String  tempMaxStr = String.valueOf((int)dailyDataWeather.getTemperatureMax()) + "°";
+        String  tempApparent = String.valueOf("Ressenti " + (int)currentWeather.getApparentTemperature() + "°");
         view.getTempTv().setText(tempStr);
         view.getTempMinTv().setText(tempMinStr);
         view.getTempMaxTv().setText(tempMaxStr);
+        view.getTempApparentTv().setText(tempApparent);
 
         // Set Weather State Text
-        switch (currentlyWeather.getIcon()) {
+        switch (currentWeather.getIcon()) {
             case WeatherJson.ICON_CLEAR_DAY:
                 view.getWeatherStateTv().setText(R.string.current_weather_clear_day);
                 break;
@@ -93,6 +90,7 @@ public class CurrentWeatherPresenter implements ICurrentWeatherPresenter, ICurre
 
         // Set Weather Summary
         view.getWeatherSummaryTv().setText(dailyDataWeather.getSummary());
+        view.getWeatherSummaryTv().setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
 
         // Set Uptodate date
         String  uptodate = "Dernière mise à jour : " + Tools.getCurrentDate("HH:mm:ss", Locale.FRENCH);

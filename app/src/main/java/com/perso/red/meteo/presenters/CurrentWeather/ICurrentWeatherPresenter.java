@@ -1,4 +1,4 @@
-package com.perso.red.meteo.presenters.CurrentWeather;
+package com.perso.red.meteo.presenters.currentWeather;
 
 /**
  * Created by pierr on 25/07/2016.

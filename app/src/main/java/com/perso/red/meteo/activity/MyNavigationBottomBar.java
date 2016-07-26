@@ -24,7 +24,7 @@ public class MyNavigationBottomBar {
         // Create items
         AHBottomNavigationItem item1 = new AHBottomNavigationItem(R.string.navigation_bottom_bar_now, R.drawable.ic_today_black_24dp, R.color.primary);
         AHBottomNavigationItem item2 = new AHBottomNavigationItem(R.string.navigation_bottom_bar_today, R.drawable.ic_schedule_black_24dp, R.color.primary);
-        AHBottomNavigationItem item3 = new AHBottomNavigationItem(R.string.navigation_bottom_bar_week, R.drawable.ic_view_week_black_24dp, R.color.primary);
+        AHBottomNavigationItem item3 = new AHBottomNavigationItem(R.string.navigation_bottom_bar_about, R.drawable.ic_info_outline_black_36dp, R.color.primary);
 
         // Add items
         bottomNavigation.addItem(item1);

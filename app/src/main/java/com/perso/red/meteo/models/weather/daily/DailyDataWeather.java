@@ -3,13 +3,12 @@ package com.perso.red.meteo.models.weather.daily;
 /**
  * Created by pierr on 26/07/2016.
  */
-
 public class DailyDataWeather {
 
     private String  summary;
     private String  icon;
-    private String  temperatureMin;
-    private String  temperatureMax;
+    private float   temperatureMin;
+    private float   temperatureMax;
 
     public String getSummary() {
         return summary;
@@ -19,11 +18,11 @@ public class DailyDataWeather {
         return icon;
     }
 
-    public String getTemperatureMin() {
+    public float getTemperatureMin() {
         return temperatureMin;
     }
 
-    public String getTemperatureMax() {
+    public float getTemperatureMax() {
         return temperatureMax;
     }
 }

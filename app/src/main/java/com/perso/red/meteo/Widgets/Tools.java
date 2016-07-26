@@ -1,4 +1,4 @@
-package com.perso.red.meteo;
+package com.perso.red.meteo.Widgets;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

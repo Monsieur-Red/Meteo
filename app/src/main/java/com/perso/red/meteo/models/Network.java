@@ -16,5 +16,7 @@ public class Network {
     /* Options */
     public static final String OPTION_LANG_FR = "lang=fr";
     public static final String OPTION_UNITS_AUTO = "units=auto";
+    public static final String OPTION_EXCLUDE_BLOCK_CURRENT_WEATHER = "&exclude=minutely&exclude=hourly&exclude=alerts&exclude=flags";
+    public static final String OPTION_EXCLUDE_BLOCK_HOURLY_WEATHER = "&exclude=currently&exclude=minutely&exclude=daily&exclude=alerts&exclude=flags";
 
 }
