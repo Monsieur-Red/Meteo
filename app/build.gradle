@@ -28,6 +28,9 @@ dependencies {
     // Src : https://github.com/ongakuer/CircleIndicator
     compile 'me.relex:circleindicator:1.2.1@aar'
 
+    // Bottom Navigation Bar
+    compile 'com.aurelhubert:ahbottomnavigation:1.0.3'
+
     // Network lib
     compile 'com.koushikdutta.ion:ion:2.+'
 

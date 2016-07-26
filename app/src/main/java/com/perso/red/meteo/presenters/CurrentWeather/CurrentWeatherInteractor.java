@@ -25,32 +25,32 @@ public class CurrentWeatherInteractor {
         this.context = context;
     }
 
-    public void getLocation(final ICurrentWeatherFinishedListener listener, double latitude, double longitude) {
-        Ion.with(context)
-                .load("GET", "http://maps.googleapis.com/maps/api/geocode/json?latlng=" + String.valueOf(latitude) + "," + String.valueOf(longitude))
-                .as(new TypeToken<LocationJson>(){})
-                .setCallback(new FutureCallback<LocationJson>() {
-                    @Override
-                    public void onCompleted(Exception error, LocationJson result) {
-                        if (error == null) {
-                            if (result.getStatus().equals(LocationJson.STATUS_OK)) {
-                                List<AddressComponent>  addressComponents = result.getResults().get(0).getAddress_components();
-                                String location = null;
-
-                                for (AddressComponent addressComponent : addressComponents) {
-                                    for (String type : addressComponent.getTypes()) {
-                                        if (type.equals("locality")) {
-                                            listener.onSuccessGetLocation(addressComponent.getLong_name());
-                                            break;
-                                        }
-                                    }
-                                }
-
-                            }
-                        }
-                        else
-                            listener.onDialog(R.string.connection_problem_dialog_title, R.string.connection_problem_dialog_message);
-                    }
-                });
-    }
+//    public void getLocation(final ICurrentWeatherFinishedListener listener, double latitude, double longitude) {
+//        Ion.with(context)
+//                .load("GET", "http://maps.googleapis.com/maps/api/geocode/json?latlng=" + String.valueOf(latitude) + "," + String.valueOf(longitude))
+//                .as(new TypeToken<LocationJson>(){})
+//                .setCallback(new FutureCallback<LocationJson>() {
+//                    @Override
+//                    public void onCompleted(Exception error, LocationJson result) {
+//                        if (error == null) {
+//                            if (result.getStatus().equals(LocationJson.STATUS_OK)) {
+//                                List<AddressComponent>  addressComponents = result.getResults().get(0).getAddress_components();
+//                                String location = null;
+//
+//                                for (AddressComponent addressComponent : addressComponents) {
+//                                    for (String type : addressComponent.getTypes()) {
+//                                        if (type.equals("locality")) {
+//                                            listener.onSuccessGetLocation(addressComponent.getLong_name());
+//                                            break;
+//                                        }
+//                                    }
+//                                }
+//
+//                            }
+//                        }
+//                        else
+//                            listener.onDialog(R.string.connection_problem_dialog_title, R.string.connection_problem_dialog_message);
+//                    }
+//                });
+//    }
 }

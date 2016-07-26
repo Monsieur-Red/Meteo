@@ -11,7 +11,14 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v7.app.AlertDialog;
 
+import com.google.gson.reflect.TypeToken;
+import com.koushikdutta.async.future.FutureCallback;
+import com.koushikdutta.ion.Ion;
 import com.perso.red.meteo.R;
+import com.perso.red.meteo.models.AddressComponent;
+import com.perso.red.meteo.models.LocationJson;
+
+import java.util.List;
 
 /**
  * Created by pierr on 25/07/2016.
@@ -19,11 +26,11 @@ import com.perso.red.meteo.R;
 
 public class GpsLocation implements LocationListener {
 
-    private Context     context;
-    private Location    location;
+    private MainActivity    activity;
+    private Location        location;
 
     public GpsLocation(MainActivity activity) {
-        context = activity.getApplicationContext();
+        this.activity = activity;
 
         // Init LocationManager
         LocationManager locationManager = (LocationManager) activity.getSystemService(Context.LOCATION_SERVICE);
@@ -44,6 +51,7 @@ public class GpsLocation implements LocationListener {
         final AlertDialog.Builder dialog = new AlertDialog.Builder(activity);
 
         dialog.setTitle(activity.getString(R.string.location_dialog_title))
+                .setCancelable(true)
                 .setMessage(R.string.location_dialog_message)
                 .setPositiveButton(activity.getString(R.string.location_dialog_settings), new DialogInterface.OnClickListener() {
                     @Override
@@ -63,6 +71,9 @@ public class GpsLocation implements LocationListener {
     @Override
     public void onLocationChanged(Location location) {
         this.location = location;
+
+        // Request GoogleAPI in order to find the city name
+        getCityName();
     }
 
     @Override
@@ -78,6 +89,38 @@ public class GpsLocation implements LocationListener {
     @Override
     public void onProviderDisabled(String provider) {
 
+    }
+
+    private void getCityName() {
+        Ion.with(activity.getApplicationContext())
+                .load("GET", "http://maps.googleapis.com/maps/api/geocode/json?latlng=" + String.valueOf(location.getLatitude()) + "," + String.valueOf(location.getLongitude()))
+                .as(new TypeToken<LocationJson>(){})
+                .setCallback(new FutureCallback<LocationJson>() {
+                    @Override
+                    public void onCompleted(Exception error, LocationJson result) {
+                        if (error == null) {
+                            if (result.getStatus().equals(LocationJson.STATUS_OK)) {
+                                List<AddressComponent> addressComponents = result.getResults().get(0).getAddress_components();
+
+                                for (AddressComponent addressComponent : addressComponents) {
+                                    for (String type : addressComponent.getTypes()) {
+                                        if (type.equals("locality"))
+                                            activity.setTitle(addressComponent.getLong_name());
+                                            break;
+                                        }
+                                    }
+                                }
+
+                            }
+                        else {
+                            final AlertDialog.Builder dialog = new AlertDialog.Builder(activity);
+                            dialog.setTitle(activity.getString(R.string.connection_problem_dialog_title))
+                                    .setMessage(R.string.connection_problem_dialog_message)
+                                    .setCancelable(true)
+                                    .show();
+                        }
+                    }
+                });
     }
 
     public Location getLocation() {

@@ -1,4 +1,4 @@
-package com.perso.red.meteo.activity;
+package com.perso.red.meteo.activity.viewpager;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -39,5 +39,8 @@ public class MyPagerAdapter extends FragmentStatePagerAdapter {
         return (fragments.size());
     }
 
+    public Fragment getFragment(int id) {
+        return (fragments.get(id));
+    }
 }
 

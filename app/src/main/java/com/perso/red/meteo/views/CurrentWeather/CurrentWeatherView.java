@@ -17,12 +17,10 @@ import com.perso.red.meteo.presenters.CurrentWeather.CurrentWeatherPresenter;
  * Created by pierr on 25/07/2016.
  */
 
-public class CurrentWeatherView extends Fragment implements ICurrentWeatherView, View.OnClickListener {
+public class CurrentWeatherView extends Fragment implements ICurrentWeatherView {
 
     private CurrentWeatherPresenter presenter;
 
-    private TextView    locationTv;
-    private TextView    dateTv;
     private ImageView   weatherImg;
     private TextView    temperatureTv;
     private TextView    weatherStateTv;
@@ -50,17 +48,11 @@ public class CurrentWeatherView extends Fragment implements ICurrentWeatherView,
         View    view = inflater.inflate(R.layout.fragment_currentweather, container, false);
 
         // Init UI Elements
-        locationTv = (TextView) view.findViewById(R.id.tv_location);
-        dateTv = (TextView) view.findViewById(R.id.tv_date);
         weatherImg = (ImageView) view.findViewById(R.id.img_weather);
         temperatureTv = (TextView) view.findViewById(R.id.tv_temperature);
         weatherStateTv = (TextView) view.findViewById(R.id.tv_weather_state);
         updateTv = (TextView) view.findViewById(R.id.tv_update);
         progressBar = (ProgressBar) view.findViewById(R.id.progress_bar);
-
-        // Init Listeners
-        view.findViewById(R.id.btn_refresh).setOnClickListener(this);
-        view.findViewById(R.id.btn_about).setOnClickListener(this);
 
         return (view);
     }
@@ -69,14 +61,7 @@ public class CurrentWeatherView extends Fragment implements ICurrentWeatherView,
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        presenter.getLocation(locationTv);
-        presenter.getDate(dateTv);
-
-    }
-
-    @Override
-    public void onClick(View v) {
-
+        presenter.getWeather();
     }
 
     @Override
@@ -94,9 +79,5 @@ public class CurrentWeatherView extends Fragment implements ICurrentWeatherView,
         dialog.setTitle(getString(title));
         dialog.setMessage(getString(msg));
         dialog.show();
-    }
-
-    public TextView getLocationTv() {
-        return locationTv;
     }
 }

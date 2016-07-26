@@ -4,13 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <include
-        android:id="@+id/top_bar"
-        layout="@layout/top_bar" />
-
     <ImageView
         android:id="@+id/img_weather"
-        android:layout_below="@+id/top_bar"
         android:layout_width="148dp"
         android:layout_height="148dp"
         android:layout_marginTop="24dp"

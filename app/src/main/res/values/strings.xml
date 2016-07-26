@@ -1,6 +1,14 @@
 <resources>
     <string name="app_name">Meteo</string>
 
+    // ToolBar
+    <string name="toolbar_refresh">refresh</string>
+    <string name="toolbar_about">about</string>
+
+    // Navigation Bottom Bar
+    <string name="navigation_bottom_bar_now">Maintenant</string>
+    <string name="navigation_bottom_bar_today">24H</string>
+    <string name="navigation_bottom_bar_week">Semaine</string>
 
     // Connection problem
     <string name="connection_problem_dialog_title">Problème de connection</string>
@@ -11,6 +19,7 @@
     <string name="location_dialog_message">Veuillez activer la géolocalisation pour utiliser cette application.</string>
     <string name="location_dialog_cancel">Quitter.</string>
     <string name="location_dialog_settings">Paramètres</string>
+
 
 
 

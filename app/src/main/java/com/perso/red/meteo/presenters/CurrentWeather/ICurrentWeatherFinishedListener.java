@@ -8,7 +8,7 @@ public interface ICurrentWeatherFinishedListener {
 
     void onDialog(int title, int msg);
 
-    void onSuccessGetLocation(String location);
+    void onSuccessGetWeather();
 
 
 }

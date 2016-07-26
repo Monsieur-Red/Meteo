@@ -17,6 +17,7 @@ import com.perso.red.meteo.activity.MainActivity;
 import com.perso.red.meteo.views.CurrentWeather.CurrentWeatherView;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Locale;
 
@@ -35,29 +36,8 @@ public class CurrentWeatherPresenter implements ICurrentWeatherPresenter, ICurre
     }
 
     @Override
-    public void getLocation(TextView locationTv) {
-        // Get Location Name
-        final Location location = ((MainActivity) view.getActivity()).getGpsLocation().getLocation();
-
-        if (location != null) {
-            view.showProgress();
-            interactor.getLocation(this, location.getLatitude(), location.getLongitude());
-        }
-    }
-
-    @Override
-    public void getDate(TextView dateTv) {
-
-    }
-
-    @Override
     public void getWeather() {
-
-    }
-
-    @Override
-    public void onClick(int viewId) {
-
+//        view.showProgress();
     }
 
     @Override
@@ -67,8 +47,8 @@ public class CurrentWeatherPresenter implements ICurrentWeatherPresenter, ICurre
     }
 
     @Override
-    public void onSuccessGetLocation(String location) {
-        view.getLocationTv().setText(location);
+    public void onSuccessGetWeather() {
         view.hideProgress();
     }
+
 }
