@@ -4,3 +4,5 @@ Basic weather forecast Android application using The Dark Sky Forecast API.
 
 ![Sample Gif](https://gfycat.com/UnlinedBasicIcterinewarbler)
 
+![](http://i.imgur.com/OUkLi.gif)
+
