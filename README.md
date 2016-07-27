@@ -1,6 +1,6 @@
 # Meteo
 
-Basic weather forecast Android application using The Dark Sky Forecast API.
+Weather forecast (24H) Android application using The Dark Sky Forecast API.
 
 ![Sample Gif](http://fat.gfycat.com/UnlinedBasicIcterinewarbler.gif)
 
