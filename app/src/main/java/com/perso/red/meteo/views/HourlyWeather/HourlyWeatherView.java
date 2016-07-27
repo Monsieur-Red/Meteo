@@ -96,17 +96,12 @@ public class HourlyWeatherView extends Fragment implements IHourlyWeatherView {
         recyclerView.setAdapter(hourlyWeatherRVA);
 
         // Init LayoutManagers
-//        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         recyclerView.setLayoutManager(new LinearLayoutManagerWithSmoothScroller(getContext()));
 
         // Set Options to enable toolbar display/hide
         recyclerView.setNestedScrollingEnabled(true);
         ViewCompat.setNestedScrollingEnabled(recyclerView, true);
         recyclerView.setHasFixedSize(false);
-
-        // Init Dividers (between items)
-//        RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL_LIST);
-//        friendsRV.addItemDecoration(itemDecoration);
     }
 
     @Override

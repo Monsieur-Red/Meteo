@@ -6,5 +6,5 @@ package com.perso.red.meteo.presenters.currentWeather;
 
 public interface ICurrentWeatherPresenter {
 
-    void getWeather();
+    void getWeather(boolean isSwipe);
 }

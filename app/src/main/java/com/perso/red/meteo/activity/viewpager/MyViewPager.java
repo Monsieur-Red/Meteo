@@ -18,13 +18,13 @@ public class MyViewPager {
 
     public MyViewPager(final MainActivity activity) {
         viewPager = (ViewPager) activity.findViewById(R.id.viewpager);
-        viewPager.setPageTransformer(false, new MyPageTransformer());
 
         // Set Adapter
         myPagerAdapter = new MyPagerAdapter(activity.getSupportFragmentManager());
         viewPager.setAdapter(myPagerAdapter);
 
         // Set ViewPager pager transformer & limit & pos
+        viewPager.setPageTransformer(false, new MyPageTransformer());
         viewPager.setOffscreenPageLimit(3);
         viewPager.setCurrentItem(0);
 
@@ -57,9 +57,5 @@ public class MyViewPager {
 
     public ViewPager getViewPager() {
         return viewPager;
-    }
-
-    public MyPagerAdapter getMyPagerAdapter() {
-        return myPagerAdapter;
     }
 }

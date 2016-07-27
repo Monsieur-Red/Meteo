@@ -1,22 +1,24 @@
 package com.perso.red.meteo.activity;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.location.Criteria;
+import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 
 import com.google.gson.reflect.TypeToken;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 import com.perso.red.meteo.R;
-import com.perso.red.meteo.models.AddressComponent;
-import com.perso.red.meteo.models.LocationJson;
+import com.perso.red.meteo.models.gpsLocation.LocationJson;
 import com.perso.red.meteo.models.Network;
 
 import java.util.List;
@@ -28,31 +30,32 @@ import java.util.List;
 public class GpsLocation implements LocationListener {
 
     private MainActivity    activity;
+    private LocationManager locationManager;
     private Location        location;
 
     public GpsLocation(MainActivity activity) {
         this.activity = activity;
 
         // Init LocationManager
-        LocationManager locationManager = (LocationManager) activity.getSystemService(Context.LOCATION_SERVICE);
+        locationManager = (LocationManager) activity.getSystemService(Context.LOCATION_SERVICE);
 
+        // Check Permission GPS & Request Location Updates
         if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
-            Criteria criteria = new Criteria();
-            String provider = locationManager.getBestProvider(criteria, false);
-
-            location = locationManager.getLastKnownLocation(provider);
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 60000, 10, this);
+            if (ContextCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+                    && ContextCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED)
+                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 10, this);
         }
-        else
-            showAlert(activity);
-
     }
 
-    private void showAlert(final MainActivity activity) {
+    public boolean isProviderEnabled() {
+        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+    }
+
+    public void showAlert() {
         final AlertDialog.Builder dialog = new AlertDialog.Builder(activity);
 
         dialog.setTitle(activity.getString(R.string.location_dialog_title))
-                .setCancelable(true)
+                .setCancelable(false)
                 .setMessage(R.string.location_dialog_message)
                 .setPositiveButton(activity.getString(R.string.location_dialog_settings), new DialogInterface.OnClickListener() {
                     @Override
@@ -61,9 +64,10 @@ public class GpsLocation implements LocationListener {
                         activity.startActivity(myIntent);
                     }
                 })
-                .setNegativeButton(activity.getString(R.string.location_dialog_cancel), new DialogInterface.OnClickListener() {
+                .setNegativeButton(R.string.location_dialog_cancel, new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface paramDialogInterface, int paramInt) {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
                     }
                 });
         dialog.show();
@@ -71,10 +75,16 @@ public class GpsLocation implements LocationListener {
 
     @Override
     public void onLocationChanged(Location location) {
-        this.location = location;
-
         // Request GoogleAPI in order to find the city name
-        getCityName();
+        if (this.location == null || location.getLongitude() != this.location.getLongitude() || location.getLatitude() != this.location.getLatitude()) {
+            getCityName(location);
+            this.location = location;
+
+            // Refresh View
+            Fragment currentF = activity.getMyViewPager().getCurrentFragment();
+            if (currentF.isResumed())
+                currentF.onViewCreated(currentF.getView(), currentF.getArguments());
+        }
     }
 
     @Override
@@ -92,27 +102,25 @@ public class GpsLocation implements LocationListener {
 
     }
 
-    private void getCityName() {
+    private void getCityName(Location location) {
         Ion.with(activity.getApplicationContext())
-                .load("GET", Network.URL_GOOGLE_API_MAP + String.valueOf(location.getLatitude()) + "," + String.valueOf(location.getLongitude()))
+                .load("GET", Network.URL_GOOGLE_API_MAP + location.getLatitude() + "," + location.getLongitude())
                 .as(new TypeToken<LocationJson>(){})
                 .setCallback(new FutureCallback<LocationJson>() {
                     @Override
                     public void onCompleted(Exception error, LocationJson result) {
                         if (error == null) {
                             if (result.getStatus().equals(LocationJson.STATUS_OK)) {
-                                List<AddressComponent> addressComponents = result.getResults().get(0).getAddress_components();
+                                for (com.perso.red.meteo.models.gpsLocation.Location locationData : result.getResults()) {
+                                    List<String>    types = locationData.getTypes();
 
-                                for (AddressComponent addressComponent : addressComponents) {
-                                    for (String type : addressComponent.getTypes()) {
-                                        if (type.equals("locality"))
-                                            activity.setTitle(addressComponent.getLong_name());
-                                            break;
-                                        }
+                                    if (types.size() == 2 && types.get(0).equals("locality") && types.get(1).equals("political")) {
+                                        activity.setTitle(locationData.getFormatted_address());
+                                        break;
                                     }
                                 }
-
                             }
+                        }
                         else {
                             final AlertDialog.Builder dialog = new AlertDialog.Builder(activity);
                             dialog.setTitle(activity.getString(R.string.connection_problem_dialog_title))

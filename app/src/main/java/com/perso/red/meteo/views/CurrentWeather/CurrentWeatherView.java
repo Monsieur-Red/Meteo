@@ -3,6 +3,7 @@ package com.perso.red.meteo.views.currentWeather;
 import android.app.AlertDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,8 +32,9 @@ public class CurrentWeatherView extends Fragment implements ICurrentWeatherView 
     private TextView    weatherSummaryTv;
     private TextView    updateTv;
 
-    private ProgressBar progressBar;
-    private AlertDialog dialog;
+    private SwipeRefreshLayout  swipeRefreshLayout;
+    private ProgressBar         progressBar;
+    private AlertDialog         dialog;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -61,7 +63,11 @@ public class CurrentWeatherView extends Fragment implements ICurrentWeatherView 
         weatherStateTv = (TextView) view.findViewById(R.id.tv_weather_state);
         weatherSummaryTv = (TextView) view.findViewById(R.id.tv_weather_summary);
         updateTv = (TextView) view.findViewById(R.id.tv_update);
+        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.refresh_layout);
         progressBar = (ProgressBar) view.findViewById(R.id.progress_bar);
+
+        // Init RefreshLayout
+        initSwipeRefreshLayout();
 
         return (view);
     }
@@ -74,7 +80,21 @@ public class CurrentWeatherView extends Fragment implements ICurrentWeatherView 
         ((MainActivity)getActivity()).getToolbar().setVisibility(View.VISIBLE);
 
         // Set Weather Model
-        presenter.getWeather();
+        presenter.getWeather(false);
+    }
+
+    private void initSwipeRefreshLayout() {
+        // Configure the refreshing colors
+        swipeRefreshLayout.setColorSchemeResources(R.color.icons);
+        swipeRefreshLayout.setProgressBackgroundColorSchemeResource(R.color.primary);
+
+        // Init Refresh Listener
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                presenter.getWeather(true);
+            }
+        });
     }
 
     @Override
@@ -92,6 +112,10 @@ public class CurrentWeatherView extends Fragment implements ICurrentWeatherView 
         dialog.setTitle(getString(title));
         dialog.setMessage(getString(msg));
         dialog.show();
+    }
+
+    public ImageView getWeatherImg() {
+        return weatherImg;
     }
 
     public TextView getTempTv() {
@@ -120,5 +144,9 @@ public class CurrentWeatherView extends Fragment implements ICurrentWeatherView 
 
     public TextView getUpdateTv() {
         return updateTv;
+    }
+
+    public SwipeRefreshLayout getSwipeRefreshLayout() {
+        return swipeRefreshLayout;
     }
 }

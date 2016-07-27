@@ -12,6 +12,9 @@ public class Network {
     public static final String URL_GOOGLE_API_MAP = "http://maps.googleapis.com/maps/api/geocode/json?latlng=";
 
     /* Dark Sky Forecast API */
+    /* Credits Forecast */
+    public static final String URL_CREDITS_FORECAST = "http://forecast.io/";
+    /* The Time Machine Call Route */
     public static final String URL_WEATHER_FORECAST = "https://api.forecast.io/forecast/" + API_KEY + "/";
     /* Options */
     public static final String OPTION_LANG_FR = "lang=fr";

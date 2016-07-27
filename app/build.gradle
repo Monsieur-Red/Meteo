@@ -19,16 +19,13 @@ android {
     }
 }
 
-allprojects {
-    repositories {
-        maven { url "https://jitpack.io" }
-    }
-}
-
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.4.0'
+
+    // Flat Buttons
+    compile 'info.hoang8f:fbutton:1.0.5'
 
     // ViewPager pager indicator
     // Src : https://github.com/ongakuer/CircleIndicator
@@ -39,8 +36,5 @@ dependencies {
 
     // Network lib
     compile 'com.koushikdutta.ion:ion:2.+'
-
-    // Physic lib
-    compile 'com.github.Jawnnypoo:PhysicsLayout:2.0.0'
 
 }

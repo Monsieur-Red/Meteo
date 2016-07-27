@@ -15,19 +15,17 @@
 
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
-        android:text="10:00"
         android:textSize="20sp"
         android:textColor="@color/primary_text"
         android:singleLine="true" />
 
     <ImageView
         android:id="@+id/img_weather"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
 
         android:layout_centerInParent="true"
         android:layout_gravity="center"
-        android:src="@mipmap/ic_launcher"
         android:background="@android:color/transparent"/>
 
     <TextView
@@ -38,7 +36,6 @@
 
         android:layout_gravity="top|left"
         android:gravity="top|left"
-        android:text="38%"
         android:textSize="14sp"
         android:textColor="@color/secondary_text"
         android:singleLine="true" />
@@ -50,7 +47,6 @@
 
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:text="4°"
         android:textSize="20sp"
         android:textColor="@color/primary_text"
         android:singleLine="true" />

@@ -1,8 +1,7 @@
 package com.perso.red.meteo.presenters.hourlyWeather;
 
-import android.support.v7.widget.LinearLayoutManager;
-
 import com.perso.red.meteo.Widgets.Tools;
+import com.perso.red.meteo.activity.GpsLocation;
 import com.perso.red.meteo.activity.MainActivity;
 import com.perso.red.meteo.models.weather.hourly.HourlyDataWeather;
 import com.perso.red.meteo.views.hourlyWeather.HourlyWeatherView;
@@ -26,9 +25,16 @@ public class HourlyWeatherPresenter implements IHourlyWeatherPresenter, IHourlyW
 
     @Override
     public void getWeather(boolean isSwipe) {
+        // Set ProgressBar Visibility
         if (!isSwipe)
             view.showProgress();
-        interactor.getWeather(this, ((MainActivity)view.getActivity()).getGpsLocation().getLocation(), Tools.getCurrentDate("yyyy-MM-dd'T'HH:mm:ssZ", Locale.getDefault()));
+
+        // Get GpsLocation
+        GpsLocation gpsLocation = ((MainActivity)view.getActivity()).getGpsLocation();
+        if (!gpsLocation.isProviderEnabled())
+            gpsLocation.showAlert();
+        else if (gpsLocation.getLocation() != null)
+            interactor.getWeather(this, gpsLocation.getLocation(), Tools.getCurrentDate("yyyy-MM-dd'T'HH:mm:ssZ", Locale.getDefault()));
     }
 
     @Override
@@ -43,15 +49,13 @@ public class HourlyWeatherPresenter implements IHourlyWeatherPresenter, IHourlyW
         // Set RecyclerView Data
         view.getHourlyWeatherRVA().update(hourlyDataWeathers);
 
-        // Set ProgressBar Visibility & SwipeRefreshLayout Refreshing
-        view.hideProgress();
-        view.getSwipeRefreshLayout().setRefreshing(false);
-
         // Smooth Scroll RecyclerView
         int hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
         view.getRecyclerView().smoothScrollToPosition(hour);
-//        LinearLayoutManager layoutManager = (LinearLayoutManager) view.getRecyclerView().getLayoutManager();
-//        layoutManager.scrollToPositionWithOffset(hour, 0);
+
+        // Set ProgressBar Visibility & SwipeRefreshLayout Refreshing
+        view.hideProgress();
+        view.getSwipeRefreshLayout().setRefreshing(false);
     }
 
 }

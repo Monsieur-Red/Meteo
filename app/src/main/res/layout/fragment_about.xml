@@ -1,16 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fbutton="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <info.hoang8f.widget.FButton
+        android:id="@+id/btn_credits"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
 
         android:layout_centerInParent="true"
-        android:gravity="center"
-        android:text="Powered by Forecast"
-        android:textSize="50sp"/>
+        android:text="@string/about_view_credits"
+        android:textSize="28sp"
+        android:singleLine="false"
+
+        fbutton:buttonColor="@color/primary"
+        fbutton:shadowColor="@color/primary_dark"
+        fbutton:shadowEnabled="true"
+        fbutton:shadowHeight="5dp"
+        fbutton:cornerRadius="5dp" />
+
 
 </RelativeLayout>

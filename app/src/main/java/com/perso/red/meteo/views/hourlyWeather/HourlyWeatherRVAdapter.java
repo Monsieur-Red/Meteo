@@ -31,7 +31,7 @@ public class HourlyWeatherRVAdapter extends RecyclerView.Adapter<HourlyWeatherRV
     }
 
     public class DataObjectHolder extends RecyclerView.ViewHolder {
-        ImageView   imageImg;
+        ImageView   weatherImg;
         TextView    hourTv;
         TextView    temperatureTv;
         TextView    precipProbabilityTv;
@@ -40,7 +40,7 @@ public class HourlyWeatherRVAdapter extends RecyclerView.Adapter<HourlyWeatherRV
             super(itemView);
 
             // Init UI Elements
-            imageImg = (ImageView) itemView.findViewById(R.id.img_weather);
+            weatherImg = (ImageView) itemView.findViewById(R.id.img_weather);
             hourTv = (TextView) itemView.findViewById(R.id.tv_hour);
             temperatureTv = (TextView) itemView.findViewById(R.id.tv_temperature);
             precipProbabilityTv = (TextView) itemView.findViewById(R.id.tv_precipProbability);
@@ -67,27 +67,48 @@ public class HourlyWeatherRVAdapter extends RecyclerView.Adapter<HourlyWeatherRV
         // Set Image
         switch (data.getIcon()) {
             case WeatherJson.ICON_CLEAR_DAY:
+                holder.weatherImg.setImageResource(R.drawable.ic_clear_day);
+                holder.precipProbabilityTv.setVisibility(View.INVISIBLE);
                 break;
             case WeatherJson.ICON_CLEAR_NIGHT:
+                holder.weatherImg.setImageResource(R.drawable.ic_clear_night);
+                holder.precipProbabilityTv.setVisibility(View.INVISIBLE);
                 break;
             case WeatherJson.ICON_RAIN:
+                holder.weatherImg.setImageResource(R.drawable.ic_rain);
+
                 // Set PrecipProbality
                 String              precipProbaStr = String.valueOf((int)(data.getPrecipProbability() * 100)) + "%";
                 holder.precipProbabilityTv.setText(precipProbaStr);
+                holder.precipProbabilityTv.setVisibility(View.VISIBLE);
                 break;
             case WeatherJson.ICON_SNOW:
+                holder.weatherImg.setImageResource(R.drawable.ic_snow);
+                holder.precipProbabilityTv.setVisibility(View.INVISIBLE);
                 break;
             case WeatherJson.ICON_SLEET:
+                holder.weatherImg.setImageResource(R.drawable.ic_sleet);
+                holder.precipProbabilityTv.setVisibility(View.INVISIBLE);
                 break;
             case WeatherJson.ICON_WIND:
+                holder.weatherImg.setImageResource(R.drawable.ic_wind);
+                holder.precipProbabilityTv.setVisibility(View.INVISIBLE);
                 break;
             case WeatherJson.ICON_FOG:
+                holder.weatherImg.setImageResource(R.drawable.ic_fog);
+                holder.precipProbabilityTv.setVisibility(View.INVISIBLE);
                 break;
             case WeatherJson.ICON_CLOUDY:
+                holder.weatherImg.setImageResource(R.drawable.ic_cloudy);
+                holder.precipProbabilityTv.setVisibility(View.INVISIBLE);
                 break;
             case WeatherJson.ICON_PARTLY_CLOUDY_DAY:
+                holder.weatherImg.setImageResource(R.drawable.ic_partly_cloudy_day);
+                holder.precipProbabilityTv.setVisibility(View.INVISIBLE);
                 break;
             case WeatherJson.ICON_PARTLY_CLOUDY_NIGHT:
+                holder.weatherImg.setImageResource(R.drawable.ic_partly_cloudy_night);
+                holder.precipProbabilityTv.setVisibility(View.INVISIBLE);
                 break;
         }
     }

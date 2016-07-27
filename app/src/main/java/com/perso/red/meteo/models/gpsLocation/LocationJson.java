@@ -1,4 +1,4 @@
-package com.perso.red.meteo.models;
+package com.perso.red.meteo.models.gpsLocation;
 
 import java.util.List;
 

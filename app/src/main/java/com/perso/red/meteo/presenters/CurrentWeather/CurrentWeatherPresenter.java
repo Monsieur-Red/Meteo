@@ -4,6 +4,7 @@ import android.view.View;
 
 import com.perso.red.meteo.R;
 import com.perso.red.meteo.Widgets.Tools;
+import com.perso.red.meteo.activity.GpsLocation;
 import com.perso.red.meteo.activity.MainActivity;
 import com.perso.red.meteo.models.weather.CurrentWeather;
 import com.perso.red.meteo.models.weather.WeatherJson;
@@ -28,14 +29,23 @@ public class CurrentWeatherPresenter implements ICurrentWeatherPresenter, ICurre
     }
 
     @Override
-    public void getWeather() {
-        view.showProgress();
-        interactor.getWeather(this, ((MainActivity)view.getActivity()).getGpsLocation().getLocation(), Tools.getCurrentDate("yyyy-MM-dd'T'HH:mm:ssZ", Locale.getDefault()));
+    public void getWeather(boolean isSwipe) {
+        // Set ProgressBar Visibility
+        if (!isSwipe)
+            view.showProgress();
+
+        // Get GpsLocation
+        GpsLocation gpsLocation = ((MainActivity)view.getActivity()).getGpsLocation();
+        if (!gpsLocation.isProviderEnabled())
+            gpsLocation.showAlert();
+        else if (gpsLocation.getLocation() != null)
+            interactor.getWeather(this, gpsLocation.getLocation(), Tools.getCurrentDate("yyyy-MM-dd'T'HH:mm:ssZ", Locale.getDefault()));
     }
 
     @Override
     public void onDialog(int title, int msg) {
         view.hideProgress();
+        view.getSwipeRefreshLayout().setRefreshing(false);
         view.setDialog(title, msg);
     }
 
@@ -58,33 +68,43 @@ public class CurrentWeatherPresenter implements ICurrentWeatherPresenter, ICurre
         switch (currentWeather.getIcon()) {
             case WeatherJson.ICON_CLEAR_DAY:
                 view.getWeatherStateTv().setText(R.string.current_weather_clear_day);
+                view.getWeatherImg().setImageResource(R.drawable.clear_day);
                 break;
             case WeatherJson.ICON_CLEAR_NIGHT:
                 view.getWeatherStateTv().setText(R.string.current_weather_clear_night);
+                view.getWeatherImg().setImageResource(R.drawable.clear_night);
                 break;
             case WeatherJson.ICON_RAIN:
                 view.getWeatherStateTv().setText(R.string.current_weather_rain);
+                view.getWeatherImg().setImageResource(R.drawable.rain);
                 break;
             case WeatherJson.ICON_SNOW:
                 view.getWeatherStateTv().setText(R.string.current_weather_snow);
+                view.getWeatherImg().setImageResource(R.drawable.snow);
                 break;
             case WeatherJson.ICON_SLEET:
                 view.getWeatherStateTv().setText(R.string.current_weather_sleet);
+                view.getWeatherImg().setImageResource(R.drawable.sleet);
                 break;
             case WeatherJson.ICON_WIND:
                 view.getWeatherStateTv().setText(R.string.current_weather_wind);
+                view.getWeatherImg().setImageResource(R.drawable.wind);
                 break;
             case WeatherJson.ICON_FOG:
                 view.getWeatherStateTv().setText(R.string.current_weather_fog);
+                view.getWeatherImg().setImageResource(R.drawable.fog);
                 break;
             case WeatherJson.ICON_CLOUDY:
                 view.getWeatherStateTv().setText(R.string.current_weather_cloudy);
+                view.getWeatherImg().setImageResource(R.drawable.cloudy);
                 break;
             case WeatherJson.ICON_PARTLY_CLOUDY_DAY:
                 view.getWeatherStateTv().setText(R.string.current_weather_partly_cloudy_day);
+                view.getWeatherImg().setImageResource(R.drawable.partly_cloudy_day);
                 break;
             case WeatherJson.ICON_PARTLY_CLOUDY_NIGHT:
                 view.getWeatherStateTv().setText(R.string.current_weather_partly_cloudy_night);
+                view.getWeatherImg().setImageResource(R.drawable.partly_cloudy_night);
                 break;
         }
 
@@ -96,8 +116,9 @@ public class CurrentWeatherPresenter implements ICurrentWeatherPresenter, ICurre
         String  uptodate = "Dernière mise à jour : " + Tools.getCurrentDate("HH:mm:ss", Locale.FRENCH);
         view.getUpdateTv().setText(uptodate);
 
-        // Set Progress Bar Visibility
+        // Set ProgressBar Visibility & SwipeRefreshLayout Refreshing
         view.hideProgress();
+        view.getSwipeRefreshLayout().setRefreshing(false);
     }
 
 }

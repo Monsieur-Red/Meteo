@@ -1,22 +1,16 @@
 package com.perso.red.meteo.activity;
 
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.Window;
 import android.view.WindowManager;
 
 import com.perso.red.meteo.R;
-import com.perso.red.meteo.activity.viewpager.MyPageTransformer;
-import com.perso.red.meteo.activity.viewpager.MyPagerAdapter;
 import com.perso.red.meteo.activity.viewpager.MyViewPager;
 
 /**
@@ -37,11 +31,9 @@ public class MainActivity extends AppCompatActivity {
         // Set View
         setContentView(R.layout.activity_main);
 
-        // Init Gps Tracker
-        gpsLocation = new GpsLocation(this);
-
         // Init ViewPager
         myViewPager = new MyViewPager(this);
+
         // Init Navigation Bottom Bar
         myNavigationBottomBar = new MyNavigationBottomBar(this, myViewPager.getViewPager());
 
@@ -54,6 +46,9 @@ public class MainActivity extends AppCompatActivity {
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.primary));
         }
+
+        // Init Gps Tracker
+        gpsLocation = new GpsLocation(this);
     }
 
     @Override
@@ -78,6 +73,10 @@ public class MainActivity extends AppCompatActivity {
 
     public Toolbar getToolbar() {
         return toolbar;
+    }
+
+    public MyViewPager getMyViewPager() {
+        return myViewPager;
     }
 
     public MyNavigationBottomBar getMyNavigationBottomBar() {
