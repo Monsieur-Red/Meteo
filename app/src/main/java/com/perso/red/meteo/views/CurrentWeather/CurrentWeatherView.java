@@ -105,6 +105,7 @@ public class CurrentWeatherView extends Fragment implements ICurrentWeatherView 
     @Override
     public void hideProgress() {
         progressBar.setVisibility(View.GONE);
+        swipeRefreshLayout.setRefreshing(false);
     }
 
     @Override
@@ -144,9 +145,5 @@ public class CurrentWeatherView extends Fragment implements ICurrentWeatherView 
 
     public TextView getUpdateTv() {
         return updateTv;
-    }
-
-    public SwipeRefreshLayout getSwipeRefreshLayout() {
-        return swipeRefreshLayout;
     }
 }

@@ -15,7 +15,10 @@ import android.widget.ProgressBar;
 import com.perso.red.meteo.R;
 import com.perso.red.meteo.Widgets.LinearLayoutManagerWithSmoothScroller;
 import com.perso.red.meteo.activity.MainActivity;
+import com.perso.red.meteo.models.weather.hourly.HourlyDataWeather;
 import com.perso.red.meteo.presenters.hourlyWeather.HourlyWeatherPresenter;
+
+import java.util.List;
 
 /**
  * Created by pierr on 26/07/2016.
@@ -112,6 +115,7 @@ public class HourlyWeatherView extends Fragment implements IHourlyWeatherView {
     @Override
     public void hideProgress() {
         progressBar.setVisibility(View.GONE);
+        swipeRefreshLayout.setRefreshing(false);
     }
 
     @Override
@@ -121,15 +125,13 @@ public class HourlyWeatherView extends Fragment implements IHourlyWeatherView {
         dialog.show();
     }
 
-    public RecyclerView getRecyclerView() {
-        return recyclerView;
+    @Override
+    public void updateData(List<HourlyDataWeather> hourlyDataWeathers) {
+        hourlyWeatherRVA.update(hourlyDataWeathers);
     }
 
-    public HourlyWeatherRVAdapter getHourlyWeatherRVA() {
-        return hourlyWeatherRVA;
-    }
-
-    public SwipeRefreshLayout getSwipeRefreshLayout() {
-        return swipeRefreshLayout;
+    @Override
+    public void smoothScrollToPosition(int hour) {
+        recyclerView.smoothScrollToPosition(hour);
     }
 }

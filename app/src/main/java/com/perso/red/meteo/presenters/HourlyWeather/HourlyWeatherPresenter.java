@@ -40,22 +40,19 @@ public class HourlyWeatherPresenter implements IHourlyWeatherPresenter, IHourlyW
     @Override
     public void onDialog(int title, int msg) {
         view.hideProgress();
-        view.getSwipeRefreshLayout().setRefreshing(false);
         view.setDialog(title, msg);
     }
 
     @Override
     public void onSuccessGetWeather(List<HourlyDataWeather> hourlyDataWeathers) {
         // Set RecyclerView Data
-        view.getHourlyWeatherRVA().update(hourlyDataWeathers);
+        view.updateData(hourlyDataWeathers);
 
         // Smooth Scroll RecyclerView
-        int hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
-        view.getRecyclerView().smoothScrollToPosition(hour);
+        view.smoothScrollToPosition(Calendar.getInstance().get(Calendar.HOUR_OF_DAY));
 
         // Set ProgressBar Visibility & SwipeRefreshLayout Refreshing
         view.hideProgress();
-        view.getSwipeRefreshLayout().setRefreshing(false);
     }
 
 }
